@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +8,9 @@ import streamlit as st
 sns.set(style='dark')
 
 def load_data():
-    df = pd.read_csv('main_data.csv')
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "main_data.csv")
+    df = pd.read_csv(file_path)
     df['dteday'] = pd.to_datetime(df['dteday'])
     df['workingday'] = df['workingday'].replace({0:'Weekend', 1:'Working Day'})
     return df
